@@ -6,9 +6,7 @@ import { Hero } from './hero';
 import { HEROES } from './mock-heroes';
 import { MessageService } from './message.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class HeroService {
 
   constructor(private messageService: MessageService) { }
@@ -17,5 +15,11 @@ export class HeroService {
     // TODO: 메시지는 히어로 데이터를 가져온 _후에_ 보내야 합니다.
     this.messageService.add('HeroService: fetched heroes');
     return of(HEROES);
+  }
+
+  getHero(id: number): Observable<Hero> {
+    // TODO: 메시지는 히어로 데이터를 가져온 _후에_ 보내야 합니다.
+    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    return of(HEROES.find(hero => hero.id === id));
   }
 }
